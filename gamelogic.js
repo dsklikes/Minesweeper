@@ -12,26 +12,39 @@ function tile()
 }
 
 
-function createBoard(size) {
-  var arr = [];
+function newGame(size) {
+  var board = [];
+  var mineCount = 0;
 
-  for (var x=0;x<size;x++)
+  for (var i=0;i<size;i++)
 	{
-		arr[x] = [];
-		for (var y=0;y<size;y++)
+		board[i] = [];
+		for (var j=0;j<size;j++)
 		{
-			arr[x][y] = new tile()
+			board[i][j] = new tile();
 		}
-	}
-  return arr;
+	} 
+    board = populateMines(board,size);
+    return board;
 }
 
-function populateMines(gameBoard)
+function populateMines(gameBoard,size)
 {
 
+var mineCount = 0;
+
+    while (mineCount < 10) {
+        var i = Math.floor((Math.random()*(size-1)));
+    	var j = Math.floor((Math.random()*(size-1)));
+    	if (!gameBoard[i][j].hasMine) {
+    		gameBoard[i][j].hasMine = true;
+    		mineCount++;
+    	}
+    }
+    return gameBoard;
 }
 
-var gameBoard = createBoard(8)
+var gameBoard = newGame(8);
 
 
 $('.grid tr td').each(function(i) {
