@@ -42,6 +42,15 @@ $(document).ready(function() {
 
     var gameBoard = newGame(8);
 
+    function checkForMine(x, y) {
+      gameBoard[x][y].isClicked = true;
+      if (gameBoard[x][y].hasMine) {
+        $(".grid tr:nth-child(" + x + ") td:nth-child(" + y + ")").html("O");
+      } else {
+        $(".grid tr:nth-child(" + x + ") td:nth-child(" + y + ")").html("-");
+      }
+
+    }
 
     // $('.grid tr td').each(function(i) {
     //               $(this).html("X");
@@ -51,7 +60,7 @@ $(document).ready(function() {
     $('td').click(function() {
       var col = $(this).parent().children().index($(this));
       var row = $(this).parent().parent().children().index($(this).parent());
-      alert('Row: ' + row + ', Column: ' + col);
+      checkForMine(row+1, col+1);
     });
 
 
