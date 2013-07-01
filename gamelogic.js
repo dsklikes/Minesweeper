@@ -1,64 +1,60 @@
-$( document ).ready(function() {
-            
-        
-
-$(function () {
+$(document).ready(function() {
 
 
-function tile()
-{
-	this.hasMine = false;
-	this.isClicked = false;
-}
+  $(function() {
 
 
-function newGame(size) {
-  var board = [];
-  var mineCount = 0;
-
-  for (var i=0;i<size;i++)
-	{
-		board[i] = [];
-		for (var j=0;j<size;j++)
-		{
-			board[i][j] = new tile();
-		}
-	} 
-    board = populateMines(board,size);
-    return board;
-}
-
-function populateMines(gameBoard,size)
-{
-
-var mineCount = 0;
-
-    while (mineCount < 10) {
-        var i = Math.floor((Math.random()*(size-1)));
-    	var j = Math.floor((Math.random()*(size-1)));
-    	if (!gameBoard[i][j].hasMine) {
-    		gameBoard[i][j].hasMine = true;
-    		mineCount++;
-    	}
+    function tile() {
+      this.hasMine = false;
+      this.isClicked = false;
     }
-    return gameBoard;
-}
-
-var gameBoard = newGame(8);
 
 
-$('.grid tr td').each(function(i) {
-                $(this).html("X");
-            });
+    function newGame(size) {
+      var board = [];
+      var mineCount = 0;
 
-$('td').click(function(){
-  var col = $(this).parent().children().index($(this));
-  var row = $(this).parent().parent().children().index($(this).parent());
-  alert('Row: ' + row + ', Column: ' + col);
-});
+      for (var i = 0; i < size; i++) {
+        board[i] = [];
+        for (var j = 0; j < size; j++) {
+          board[i][j] = new tile();
+        }
+      }
+      board = populateMines(board, size);
+      return board;
+    }
+
+    function populateMines(gameBoard, size) {
+
+      var mineCount = 0;
+
+      while (mineCount < 10) {
+        var i = Math.floor((Math.random() * (size - 1)));
+        var j = Math.floor((Math.random() * (size - 1)));
+        if (!gameBoard[i][j].hasMine) {
+          gameBoard[i][j].hasMine = true;
+          $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").html("X");
+          mineCount++;
+        }
+      }
+      return gameBoard;
+    }
+
+    var gameBoard = newGame(8);
 
 
+    // $('.grid tr td').each(function(i) {
+    //               $(this).html("X");
+    //           });
 
-});
+
+    $('td').click(function() {
+      var col = $(this).parent().children().index($(this));
+      var row = $(this).parent().parent().children().index($(this).parent());
+      alert('Row: ' + row + ', Column: ' + col);
+    });
+
+
+  });
 
 });
