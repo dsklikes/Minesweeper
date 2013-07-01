@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+            
+        
+
 $(function () {
 
 var tile = new Array();
@@ -16,6 +20,9 @@ var createBoard = function (size){
 	}
 }
 
+$('.grid tr td').each(function(i) {
+                $(this).html("X");
+            });
 
 $('td').click(function(){
   var col = $(this).parent().children().index($(this));
@@ -25,4 +32,5 @@ $('td').click(function(){
 
 
 
+});
 });
