@@ -3,6 +3,7 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="gamelogic.js"></script>
+        <script type="text/javascript" src="jquery-2.0.2.min.js"></script>
     </head>
     <body>
         <table class="grid">
@@ -89,5 +90,12 @@
                 </tr>
             </tbody>
         </table>
+        <script>
+        $( document ).ready(function() {
+            $('.grid tr').each(function(i) {
+                $('td').html("X");
+            });
+        });
+        </script>
     </body>
 </html>
