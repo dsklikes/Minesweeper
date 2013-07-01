@@ -45,9 +45,9 @@ $(document).ready(function() {
     function checkForMine(x, y) {
       gameBoard[x][y].isClicked = true;
       if (gameBoard[x][y].hasMine) {
-        $(".grid tr:nth-child(" + x + ") td:nth-child(" + y + ")").html("O");
+        $(".grid tr:nth-child(" + (x+1) + ") td:nth-child(" + (y+1) + ")").html("O");
       } else {
-        $(".grid tr:nth-child(" + x + ") td:nth-child(" + y + ")").html("-");
+        $(".grid tr:nth-child(" + (x+1) + ") td:nth-child(" + (y+1) + ")").html("-");
       }
 
     }
@@ -60,7 +60,7 @@ $(document).ready(function() {
     $('td').click(function() {
       var col = $(this).parent().children().index($(this));
       var row = $(this).parent().parent().children().index($(this).parent());
-      checkForMine(row+1, col+1);
+      checkForMine(row, col);
     });
 
 
