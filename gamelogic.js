@@ -4,23 +4,35 @@ $( document ).ready(function() {
 
 $(function () {
 
-var tile = new Array();
+
+function tile()
+{
+	this.hasMine = false;
+	this.isClicked = false;
+}
 
 
-var createBoard = function (size){
-	var rowsize = size;
-	var colsize = size;
-	for (var x=0;x<rowsize;x++)
+function createBoard(size) {
+  var arr = [];
+
+  for (var x=0;x<size;x++)
 	{
-		for (var y=0;y<colsize;y++)
+		arr[x] = [];
+		for (var y=0;y<size;y++)
 		{
-			tile[x][y] = 0;
-			tile[x][y].hasMine = false;
-			tile[x][y].isClicked = false;
+			arr[x][y] = new tile()
 		}
 	}
+  return arr;
 }
-createBoard(8);
+
+function populateMines(gameBoard)
+{
+
+}
+
+var gameBoard = createBoard(8)
+
 
 $('.grid tr td').each(function(i) {
                 $(this).html("X");
