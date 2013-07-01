@@ -1,0 +1,16 @@
+.grid {
+    width: 320px;
+    height: 320px;
+    border-collapse:separate;
+    border-spacing:0;
+}
+.grid td {
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border: solid 1px black;
+}
+.grid td:hover {
+    border-color: red;
+}
