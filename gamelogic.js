@@ -1,5 +1,9 @@
+$(function () {
 
-function createBoard(size){
+var tile = new Array();
+
+
+var createBoard = function (size){
 	var rowsize = size;
 	var colsize = size;
 	for (var x=0;i<rowsize;x++)
@@ -16,5 +20,9 @@ function createBoard(size){
 $('td').click(function(){
   var col = $(this).parent().children().index($(this));
   var row = $(this).parent().parent().children().index($(this).parent());
-  
+  alert('Row: ' + row + ', Column: ' + col);
+});
+
+
+
 });
