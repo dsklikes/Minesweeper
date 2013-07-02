@@ -33,7 +33,7 @@ $(document).ready(function() {
         var j = Math.floor((Math.random() * (size - 1)));
         if (!gameBoard[i][j].hasMine) {
           gameBoard[i][j].hasMine = true;
-          $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").html("X");
+          $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").html("*");
           mineCount++;
         }
       }
@@ -43,58 +43,31 @@ $(document).ready(function() {
     var gameBoard = newGame(8);
 
     function tileClicked(x, y) {
+      var mineCounter = 0;
       gameBoard[x][y].isClicked = true;
       if (gameBoard[x][y].hasMine) {
-        $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html("O");
+        $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html("X");
+        return;
       } else {
-        showNearbyMineCount(x, y);
-      }
-
-    }
-
-    function showNearbyMineCount(x, y) {
-      var mineCounter = 0;
-      for (var i = -1; i <= 1; i++) {
-        for (var j = -1; j <= 1; j++) {
-          if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
-            if (gameBoard[x + i][y + j].hasMine) {
-              mineCounter++;
-
+        for (var i = -1; i <= 1; i++) {
+          for (var j = -1; j <= 1; j++) {
+            if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
+              if (gameBoard[x + i][y + j].hasMine) {
+                mineCounter++;
+              }
+              tileClicked(i,j)
             }
           }
-          }
         }
-       $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
-
-  /*     if (mineCounter === 0)
-        {
-
-          for (var i = -1; i <= 1; i++) {
-            for (var j = -1; j <= 1; j++) {
-              if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
-                 showNearbyMineCount(x+i,y+j)
-              }
-              }
-            }         
-        }
-        else
-        {
-         $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
-
-        }*/
-
+        $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
       }
-
-
-
-
+    }
 
     $('td').click(function() {
       var col = $(this).parent().children().index($(this));
       var row = $(this).parent().parent().children().index($(this).parent());
       tileClicked(row, col);
     });
-
 
   });
 
