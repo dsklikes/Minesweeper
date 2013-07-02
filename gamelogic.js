@@ -108,24 +108,19 @@ $(function() {
   }
 
   // shows all Mines on board
-  function showAllMines() {
+  function showOrHideMines(currentState) {
     for (var i = 0; i < size; i++) {
       for (var j = 0; j < size; j++) {
         if (gameBoard[i][j].hasMine) {
+          if (currentState) {
           $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").html("X");
-          $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").css("background-color", "yellow");
-        }
-      }
-    }
-  }
-
-  // hides all Mines on board
-  function hideAllMines() {
-    for (var i = 0; i < size; i++) {
-      for (var j = 0; j < size; j++) {
-        if (gameBoard[i][j].hasMine) {
+          $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").css("background-color", "yellow");   
+          }
+          else
+          {
           $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").html("");
           $(".grid tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").css("background-color", "#C8C8C8");
+          }
         }
       }
     }
@@ -133,7 +128,7 @@ $(function() {
 
   // ends game
   function endGame() {
-    showAllMines();
+    showOrHideMines(true);
     gameActive = false;
     $('td').removeClass('active');
   }
@@ -180,6 +175,7 @@ function validationAlert(){
   $('li.newGame').click(function() {
       gameBoard = newGame(size, mines);
       gameActive = true;
+      godModeOn = false;
       $('td').css('background-color','#C8C8C8');
       $('td').removeClass('active').addClass('active');
       $('td').html('');
@@ -189,12 +185,12 @@ function validationAlert(){
   $('li.godMode').click(function() {
       if (godModeOn)
       {
-        hideAllMines();
+        showOrHideMines(false);
         godModeOn = false;
         $(this).removeClass('on');
       }
       else {
-        showAllMines();
+        showOrHideMines(true);
         godModeOn = true;
         $(this).addClass('on');
       }
