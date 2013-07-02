@@ -42,25 +42,36 @@ $(document).ready(function() {
 
     var gameBoard = newGame(8);
 
-    function checkForMine(x, y) {
+    function tileClicked(x, y) {
       gameBoard[x][y].isClicked = true;
       if (gameBoard[x][y].hasMine) {
-        $(".grid tr:nth-child(" + (x+1) + ") td:nth-child(" + (y+1) + ")").html("O");
+        $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html("O");
       } else {
-        $(".grid tr:nth-child(" + (x+1) + ") td:nth-child(" + (y+1) + ")").html("-");
+        showNearbyMineCount(x, y);
       }
 
     }
 
-    // $('.grid tr td').each(function(i) {
-    //               $(this).html("X");
-    //           });
+    function showNearbyMineCount(x, y) {
+      var mineCounter = 0;
+      for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+          if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
+            if (gameBoard[x + i][y + j].hasMine) {
+              mineCounter++;
+            }
+          }
 
+            $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
+          
+        }
+      }
+    }
 
     $('td').click(function() {
       var col = $(this).parent().children().index($(this));
       var row = $(this).parent().parent().children().index($(this).parent());
-      checkForMine(row, col);
+      tileClicked(row, col);
     });
 
 
