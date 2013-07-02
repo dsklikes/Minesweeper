@@ -59,14 +59,35 @@ $(document).ready(function() {
           if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
             if (gameBoard[x + i][y + j].hasMine) {
               mineCounter++;
+
             }
           }
-
-            $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
-          
+          }
         }
+       $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
+
+  /*     if (mineCounter === 0)
+        {
+
+          for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+              if ((x + i >= 0) && (y + j >= 0) && (x + i <= 7) && (y + j <= 7)) {
+                 showNearbyMineCount(x+i,y+j)
+              }
+              }
+            }         
+        }
+        else
+        {
+         $(".grid tr:nth-child(" + (x + 1) + ") td:nth-child(" + (y + 1) + ")").html(mineCounter);
+
+        }*/
+
       }
-    }
+
+
+
+
 
     $('td').click(function() {
       var col = $(this).parent().children().index($(this));
